@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人财务管理</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>个人财务管理</h1>
+            <button class="btn-logout">退出登录</button>
+        </header>
+
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="card card-income">
+                <div class="card-label">总收入</div>
+                <div class="card-amount" id="total-income">0.00 ¥</div>
+            </div>
+            <div class="card card-expense">
+                <div class="card-label">总支出</div>
+                <div class="card-amount" id="total-expense">0.00 ¥</div>
+            </div>
+            <div class="card card-balance">
+                <div class="card-label">净余额</div>
+                <div class="card-amount" id="net-balance">0.00 ¥</div>
+            </div>
+        </div>
+
+        <!-- Add Transaction Form -->
+        <div class="section">
+            <h2 class="section-title">添加新交易</h2>
+            <form class="transaction-form" id="transaction-form">
+                <div class="form-group">
+                    <label>日期</label>
+                    <input type="date" id="trans-date" required>
+                </div>
+                <div class="form-group">
+                    <label>类型</label>
+                    <select id="trans-type" required>
+                        <option value="expense">支出</option>
+                        <option value="income">收入</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>类别</label>
+                    <select id="trans-category" required>
+                        <option value="餐饮">餐饮</option>
+                        <option value="住房">住房</option>
+                        <option value="交通">交通</option>
+                        <option value="娱乐">娱乐</option>
+                        <option value="购物">购物</option>
+                        <option value="医疗">医疗</option>
+                        <option value="教育">教育</option>
+                        <option value="工资">工资</option>
+                        <option value="投资">投资</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>金额</label>
+                    <input type="number" id="trans-amount" step="0.01" min="0" placeholder="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label>描述</label>
+                    <input type="text" id="trans-desc" placeholder="可选">
+                </div>
+                <button type="submit" class="btn-add">添加</button>
+            </form>
+        </div>
+
+        <!-- Statistics Chart -->
+        <div class="section">
+            <h2 class="section-title">收支统计</h2>
+            <div class="chart-container">
+                <canvas id="stats-chart"></canvas>
+            </div>
+        </div>
+
+        <!-- Transaction Records -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">交易记录</h2>
+                <div class="action-buttons">
+                    <button class="btn-action" id="btn-export">导出数据</button>
+                    <button class="btn-action" id="btn-history">历史数据</button>
+                    <button class="btn-action" id="btn-import">导入数据</button>
+                    <input type="file" id="file-import" accept=".json" style="display: none;">
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="transaction-table">
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>类别</th>
+                            <th>类型</th>
+                            <th>金额</th>
+                            <th>描述</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaction-list">
+                        <!-- Transactions will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
